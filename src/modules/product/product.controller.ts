@@ -12,7 +12,7 @@ const createProduct = resolveRequestOrThrowError(
     const result = await ProductServices.createProductIntoDB(request.body);
     if (result) {
       sendGenericSuccessfulResponse(response, {
-        message: "Product creation successful",
+        message: "Product created successfully",
         data: result,
       });
     } else {
@@ -60,4 +60,49 @@ const getAllProducts = resolveRequestOrThrowError(
   }
 );
 
+const updateProduct = resolveRequestOrThrowError(
+  async (request: Request, response: Response, next: NextFunction) => {
+    const result = await ProductServices.updateProductIntoDB(
+      request.params.productId,
+      request.body
+    );
+    if (result) {
+      sendGenericSuccessfulResponse(response, {
+        message: "Product updated successfully",
+        data: result,
+      });
+    } else {
+      throw new NoDataFoundError(
+        "Requested product is not available in db",
+        httpStatus.NOT_FOUND
+      );
+    }
+  }
+);
 
+const deleteProduct = resolveRequestOrThrowError(
+  async (request: Request, response: Response, next: NextFunction) => {
+    const result = await ProductServices.deleteProductFromDB(
+      request.params.productId
+    );
+    if (result) {
+      sendGenericSuccessfulResponse(response, {
+        message: "Requested product deleted successfully",
+        data: result,
+      });
+    } else {
+      throw new NoDataFoundError(
+        "Requested product is not available in db",
+        httpStatus.NOT_FOUND
+      );
+    }
+  }
+);
+
+export const ProductController = {
+  createProduct,
+  getProduct,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
+};
