@@ -16,8 +16,7 @@ const getAllProductsFromDB = async () => {
   const result = await ProductModel.find();
   const refinedResult = result.map((product) => {
     const simple = product.toJSON();
-    const { __v, ...data } = simple;
-    return data;
+    return simple;
   });
   return refinedResult;
 };

@@ -71,7 +71,7 @@ export const globalErrorHandler = (
       message: error.message,
       data: [],
     });
-  } else if (error instanceof SyntaxError && error?.statusCode === 400) {
+  } else if (error instanceof SyntaxError) {
     errorSources[0].path = "Request body holds inappropriate JSON object";
     return res.status(httpStatus.BAD_REQUEST).json({
       success: false,
