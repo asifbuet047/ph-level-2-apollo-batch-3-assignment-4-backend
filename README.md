@@ -1,20 +1,31 @@
-# How to run this backend application (Sporting Goods E-Commerce Application Backend) locally
-
-**Ans:** This backend project is **Sporting Goods E-Commerce Application Backend**. A tourist can now rent a bike for his laisure time and enjoy the beauty of our Cox's bazar sea beach. A tourist can easily sign up and log in in our platform by giving email name and phone number. Then he can rent a bike and after any time he can return the bike. Admin user can control the return of bike.
-
-[Repo link of Sporting Goods E-Commerce Application Backend](https://github.com/asifbuet047/ph-level-2-apollo-batch-3-assignment-3)
+[Repo link of Sporting Goods E-Commerce Application Backend](https://github.com/asifbuet047/ph-level-2-apollo-batch-3-assignment-4-backend)
 
 [Live link of Sporting Goods E-Commerce Application Backend](https://ph-level-2-apollo-batch-3-assignment-4-backend.vercel.app/)
 
 [Project Overiew of Sporting Goods E-Commerce Application Backend](https://drive.google.com/file/d/17BvAmtj7YRoWna_2d_VT5FRIAE5SOz27/view?usp=sharing)
 
-Technology used by this project
+# Sporting Goods E-Commerce Application Backend
+
+## Introduction
+
+Brief introduction or tagline about the project.
+
+## Project Description
+
+Detailed description of the project, including its purpose and goals.
+
+## Features
+
+- List of key features or functionalities.
+- Bullet points are helpful for clarity.
+
+## Technology Stack
 
 - Node.js
 - Express.js
 - Mongoose for data validation
 
-**Follow the following procedure to run this server in your machine**
+## Installation Guideline
 
 - Follow the git repo link and clone it in your at desired folder
 - After cloning open VS code at that folder
@@ -23,9 +34,27 @@ Technology used by this project
 - Now run the command `npm run build`. This command transpile all js code into ts in corresponding folder and use nodejs to run the server
 - Create .env file in root directory
 
-```
-PORT = YOUR_DESIRED_PORT_NUMBER
-MONGODB_URL = YOUR_MONGODB_SERVER_LINK
-```
+### Prerequisites
 
-- Now run this command `npm run start:dev`. In your terminal you can see the server is listening at your port in env config file
+- List any software or dependencies that need to be installed beforehand (if any).
+
+### Installation Steps
+
+1. Step-by-step instructions on how to install the project.
+2. Provide code examples or commands for clarity.
+
+### Configuration
+
+1. Create a `.env` file in the root directory of the project.
+2. Add necessary configuration variables in the `.env` file.
+   Example:
+   ```bash
+    PORT=3000
+    DB_URL=your_db_connection_uri
+    API_KEY=your_api_key_here
+   ```
+3. Explain any specific configuration requirements or variables used in your project.
+
+## Usage
+
+Instructions or examples for using the project. Include screenshots or code snippets if applicable.
