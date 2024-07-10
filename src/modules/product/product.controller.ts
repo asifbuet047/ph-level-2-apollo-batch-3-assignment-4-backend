@@ -31,7 +31,7 @@ const getProduct = resolveRequestOrThrowError(
     );
     if (result) {
       sendGenericSuccessfulResponse(response, {
-        message: "Requested product retrives successfully",
+        message: "Requested product retrived successfully",
         data: result,
       });
     } else {
@@ -46,9 +46,9 @@ const getProduct = resolveRequestOrThrowError(
 const getAllProducts = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
     const result = await ProductServices.getAllProductsFromDB();
-    if (Array.isArray(request)) {
+    if (Array.isArray(result)) {
       sendGenericSuccessfulResponse(response, {
-        message: "Requested products is not available in db",
+        message: "Products retrived successfully",
         data: result,
       });
     } else {

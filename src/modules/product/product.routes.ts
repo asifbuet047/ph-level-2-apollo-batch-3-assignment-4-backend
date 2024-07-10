@@ -18,7 +18,7 @@ router.get("/:productId", ProductController.getProduct);
 router.get("/", ProductController.getAllProducts);
 
 router.put(
-  "/",
+  "/:productId",
   validateRequestPayloadWithSchema(
     ProductValidation.productUpdateValidationSchema
   ),
