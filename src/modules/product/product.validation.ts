@@ -46,9 +46,11 @@ const productCreationValidationSchema = z.object({
     .gt(0, {
       message: "Price must be greater than 0",
     }),
-  product_image_url: z.string({
-    invalid_type_error: "Product Image URL must be string",
-  }),
+  product_image_url: z
+    .string({
+      invalid_type_error: "Product Image URL must be string",
+    })
+    .optional(),
 });
 
 const productUpdateValidationSchema = z.object({

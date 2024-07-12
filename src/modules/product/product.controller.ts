@@ -14,16 +14,16 @@ const createProduct = resolveRequestOrThrowError(
     if (request.file?.filename === "notAnImageFile.invalid") {
       throw new InvalidImageFileUploadedError();
     } else {
+      const filePath = request.file?.path;
+      const fileName = request.file?.originalname;
+      const info = await sendImageFileToCloudinaryHostingServer(
+        fileName as string,
+        filePath as string
+      );
+      request.body.product_image_url = info?.secure_url as string;
       const result = await ProductServices.createProductIntoDB(request.body);
       if (result) {
         console.log(result);
-        const filePath = request.file?.path;
-        const fileName = request.file?.originalname;
-        const info = await sendImageFileToCloudinaryHostingServer(
-          fileName as string,
-          filePath as string
-        );
-        console.log(info);
         sendGenericSuccessfulResponse(response, {
           message: "Product created successfully",
           data: result,
