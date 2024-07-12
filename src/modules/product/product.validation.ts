@@ -39,6 +39,16 @@ const productCreationValidationSchema = z.object({
     .gte(0, {
       message: "Rating must be greater than or equal 0",
     }),
+  price: z
+    .number({
+      invalid_type_error: "Price must be number",
+    })
+    .gt(0, {
+      message: "Price must be greater than 0",
+    }),
+  product_image_url: z.string({
+    invalid_type_error: "Product Image URL must be string",
+  }),
 });
 
 const productUpdateValidationSchema = z.object({
@@ -85,6 +95,14 @@ const productUpdateValidationSchema = z.object({
     })
     .gte(0, {
       message: "Rating must be greater than or equal 0",
+    })
+    .optional(),
+  price: z
+    .number({
+      invalid_type_error: "Price must be number",
+    })
+    .gt(0, {
+      message: "Price must be greater than 0",
     })
     .optional(),
 });

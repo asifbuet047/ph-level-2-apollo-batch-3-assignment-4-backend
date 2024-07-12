@@ -4,27 +4,30 @@ import { TProduct } from "./product.interface";
 const ProductSchema = new Schema<TProduct>({
   name: {
     type: Schema.Types.String,
+    unique: true,
     required: true,
   },
   description: {
     type: Schema.Types.String,
-    required: true,
+    unique: true,
   },
   category: {
     type: Schema.Types.String,
-    required: true,
   },
   brand: {
     type: Schema.Types.String,
-    required: true,
   },
   quantity: {
     type: Schema.Types.Number,
-    required: true,
   },
   rating: {
     type: Schema.Types.Number,
-    required: true,
+  },
+  price: {
+    type: Schema.Types.Number,
+  },
+  product_image_url: {
+    type: Schema.Types.String,
   },
 });
 
