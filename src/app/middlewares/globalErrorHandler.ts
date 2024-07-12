@@ -8,6 +8,7 @@ import DuplicateProductError from "../errorHandlers/DuplicateProductError";
 import ProductNotAvailableError from "../errorHandlers/ProductNotAvailableError";
 import mongoose from "mongoose";
 import mongooseErrorHandler from "../errorHandlers/mongooseErrorHandler";
+import InvalidImageFileUploadedError from "../errorHandlers/InvalidImageFileUploadedError";
 
 export const globalErrorHandler = (
   error: Error,
@@ -78,6 +79,11 @@ export const globalErrorHandler = (
       message: "Bad request. Invalid JSON",
       errorMessage: errorSources,
       stack: error.stack,
+    });
+  } else if (error instanceof InvalidImageFileUploadedError) {
+    return res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: error.message,
     });
   } else {
     return res.status(statusCode).json({

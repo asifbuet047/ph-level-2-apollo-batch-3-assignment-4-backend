@@ -6,20 +6,34 @@ import { sendGenericSuccessfulResponse } from "../../app/utils/sendGenericRespon
 import DatabaseOperationFailedError from "../../app/errorHandlers/DatabaseOperationFailedError";
 import httpStatus from "http-status";
 import NoDataFoundError from "../../app/errorHandlers/NoDataFoundError";
+import { sendImageFileToCloudinaryHostingServer } from "../../app/utils/sendImageFileToCloudinaryHostingServer";
+import InvalidImageFileUploadedError from "../../app/errorHandlers/InvalidImageFileUploadedError";
 
 const createProduct = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
-    const result = await ProductServices.createProductIntoDB(request.body);
-    if (result) {
-      sendGenericSuccessfulResponse(response, {
-        message: "Product created successfully",
-        data: result,
-      });
+    if (request.file?.filename === "notAnImageFile.invalid") {
+      throw new InvalidImageFileUploadedError();
     } else {
-      throw new DatabaseOperationFailedError(
-        "Product creation operation failed",
-        httpStatus.INSUFFICIENT_STORAGE
-      );
+      const result = await ProductServices.createProductIntoDB(request.body);
+      if (result) {
+        console.log(result);
+        const filePath = request.file?.path;
+        const fileName = request.file?.originalname;
+        const info = await sendImageFileToCloudinaryHostingServer(
+          fileName as string,
+          filePath as string
+        );
+        console.log(info);
+        sendGenericSuccessfulResponse(response, {
+          message: "Product created successfully",
+          data: result,
+        });
+      } else {
+        throw new DatabaseOperationFailedError(
+          "Product creation operation failed",
+          httpStatus.INSUFFICIENT_STORAGE
+        );
+      }
     }
   }
 );
