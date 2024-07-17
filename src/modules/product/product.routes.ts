@@ -11,8 +11,13 @@ router.post(
   "/",
   saveImageFileIntoLocalServersTempFolder.single("file"),
   (request: Request, response: Response, next: NextFunction) => {
-    console.log(request.file);
-    request.body = JSON.parse(request.body.data);
+    console.log(request.body);
+    const temp = request.body;
+    for (const key in temp) {
+      if (key === "quantity" || key === "price" || key === "rating") {
+        temp[key] = Number.parseInt(temp[key]);
+      }
+    }
     next();
   },
   validateRequestPayloadWithSchema(

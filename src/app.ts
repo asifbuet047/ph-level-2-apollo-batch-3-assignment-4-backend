@@ -6,8 +6,8 @@ import notFoundRouteHandler from "./app/middlewares/notFoundRouteHandler";
 import { ProductRouter } from "./modules/product/product.routes";
 
 const app = express();
-
 app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 
 app.get("/", (request: Request, response: Response) => {

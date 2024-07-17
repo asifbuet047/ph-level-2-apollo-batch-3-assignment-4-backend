@@ -38,7 +38,8 @@ const productCreationValidationSchema = z.object({
     })
     .gte(0, {
       message: "Rating must be greater than or equal 0",
-    }),
+    })
+    .optional(),
   price: z
     .number({
       invalid_type_error: "Price must be number",

@@ -16,7 +16,7 @@ export const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  let statusCode = 500;
+  let statusCode = httpStatus.BAD_REQUEST;
   let message = "Something went wrong!";
   let errorSources: TErrorSources = [
     {

@@ -17,6 +17,10 @@ export const sendImageFileToCloudinaryHostingServer = (
       filePath,
       {
         public_id: fileName,
+        transformation: [
+          { width: 1024, height: 1024, fetch_format: "jpg" },
+          { effect: "outline", color: "#AF161B" },
+        ],
       },
       (error, result) => {
         if (error) {
