@@ -2,6 +2,7 @@ import { deleteModel } from "mongoose";
 import { TProduct } from "./product.interface";
 import ProductModel from "./product.model";
 import { Multer } from "multer";
+import { any } from "zod";
 
 const createProductIntoDB = async (product: TProduct) => {
   const result = (await ProductModel.create(product)).toJSON();
@@ -15,6 +16,15 @@ const getProductFromDB = async (productId: string) => {
 
 const getAllProductsFromDB = async () => {
   const result = await ProductModel.find();
+  const refinedResult = result.map((product) => {
+    const simple = product.toJSON();
+    return simple;
+  });
+  return refinedResult;
+};
+
+const getLatestProductsFromDB = async () => {
+  const result = await ProductModel.find().sort({ createdAt: -1 }).limit(5);
   const refinedResult = result.map((product) => {
     const simple = product.toJSON();
     return simple;
@@ -43,6 +53,7 @@ export const ProductServices = {
   createProductIntoDB,
   getProductFromDB,
   getAllProductsFromDB,
+  getLatestProductsFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
 };

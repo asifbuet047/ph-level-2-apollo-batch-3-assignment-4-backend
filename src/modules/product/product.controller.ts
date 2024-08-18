@@ -59,17 +59,32 @@ const getProduct = resolveRequestOrThrowError(
 
 const getAllProducts = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
-    const result = await ProductServices.getAllProductsFromDB();
-    if (Array.isArray(result)) {
-      sendGenericSuccessfulResponse(response, {
-        message: "Products retrived successfully",
-        data: result,
-      });
+    if (request.query.latest) {
+      const result = await ProductServices.getLatestProductsFromDB();
+      if (Array.isArray(result)) {
+        sendGenericSuccessfulResponse(response, {
+          message: "Products retrived successfully",
+          data: result,
+        });
+      } else {
+        throw new NoDataFoundError(
+          "Any product is not available in db",
+          httpStatus.NOT_FOUND
+        );
+      }
     } else {
-      throw new NoDataFoundError(
-        "Any product is not available in db",
-        httpStatus.NOT_FOUND
-      );
+      const result = await ProductServices.getAllProductsFromDB();
+      if (Array.isArray(result)) {
+        sendGenericSuccessfulResponse(response, {
+          message: "Products retrived successfully",
+          data: result,
+        });
+      } else {
+        throw new NoDataFoundError(
+          "Any product is not available in db",
+          httpStatus.NOT_FOUND
+        );
+      }
     }
   }
 );
@@ -81,6 +96,7 @@ const updateProduct = resolveRequestOrThrowError(
       request.body
     );
     if (result) {
+      console.log(result);
       sendGenericSuccessfulResponse(response, {
         message: "Product updated successfully",
         data: result,
