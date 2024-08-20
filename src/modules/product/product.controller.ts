@@ -129,10 +129,28 @@ const deleteProduct = resolveRequestOrThrowError(
   }
 );
 
+const getCategories = resolveRequestOrThrowError(
+  async (request: Request, response: Response, next: NextFunction) => {
+    const result = await ProductServices.getCategoriesFromDB();
+    if (Array.isArray(result)) {
+      sendGenericSuccessfulResponse(response, {
+        message: "Categories retrived successfully",
+        data: result,
+      });
+    } else {
+      throw new NoDataFoundError(
+        "Any category is not available in db",
+        httpStatus.NOT_FOUND
+      );
+    }
+  }
+);
+
 export const ProductController = {
   createProduct,
   getProduct,
   getAllProducts,
   updateProduct,
   deleteProduct,
+  getCategories,
 };

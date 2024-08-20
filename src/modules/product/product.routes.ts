@@ -25,6 +25,7 @@ router.post(
   ),
   ProductController.createProduct
 );
+router.get("/categories", ProductController.getCategories); //This route should be above the getProduct route
 
 router.get("/:productId", ProductController.getProduct);
 

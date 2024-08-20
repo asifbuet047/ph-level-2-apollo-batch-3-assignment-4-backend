@@ -48,7 +48,7 @@ const getAllDiscount = resolveRequestOrThrowError(
     const result = await DiscountServices.getAllDiscountsFromDB();
     if (result) {
       sendGenericSuccessfulResponse(response, {
-        message: "Discount updated successfully",
+        message: "Discount retrived successfully",
         data: result,
       });
     } else {
