@@ -23,7 +23,6 @@ const createProduct = resolveRequestOrThrowError(
       request.body.product_image_url = info?.secure_url as string;
       const result = await ProductServices.createProductIntoDB(request.body);
       if (result) {
-        console.log(result);
         sendGenericSuccessfulResponse(response, {
           message: "Product created successfully",
           data: result,

@@ -5,7 +5,8 @@ import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 import notFoundRouteHandler from "./app/middlewares/notFoundRouteHandler";
 import { ProductRouter } from "./modules/product/product.routes";
 import { DiscountRouter } from "./modules/discount/discount.routes";
-import config from "./app/config/config";
+
+import { CartRouter } from "./modules/cart/cart.routes";
 
 const app = express();
 app.use(cors());
@@ -21,13 +22,7 @@ app.get("/", (request: Request, response: Response) => {
 
 app.use("/product", ProductRouter.router);
 app.use("/discount", DiscountRouter.router);
-
-app.get(
-  "/secretkey",
-  async (request: Request, response: Response, next: NextFunction) => {
-    response.status(200).send({ secret: config.stripe_secrect_key });
-  }
-);
+app.use("/cart", CartRouter.router);
 
 app.use(globalErrorHandler);
 app.use(notFoundRouteHandler);
