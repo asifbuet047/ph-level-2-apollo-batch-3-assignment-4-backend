@@ -10,4 +10,5 @@ export default {
   cloudinary_cloud_name: process.env.CLOUDINARY_CLOUD_NAME as string,
   cloudinary_api_key: process.env.CLOUDINARY_API_KEY as string,
   cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET as string,
+  stripe_secrect_key: process.env.STRIPE_SECRET_KEY as string,
 };
