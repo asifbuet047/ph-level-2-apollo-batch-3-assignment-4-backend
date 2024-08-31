@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { resolveRequestOrThrowError } from "../../app/utils/resolveRequestOrThrowError";
-import { CartServices } from "./cart.services";
+import { OrderServices } from "./order.services";
 import { sendGenericSuccessfulResponse } from "../../app/utils/sendGenericResponse";
 import DatabaseOperationFailedError from "../../app/errorHandlers/DatabaseOperationFailedError";
 import httpStatus from "http-status";
@@ -8,54 +8,54 @@ import NoDataFoundError from "../../app/errorHandlers/NoDataFoundError";
 import config from "../../app/config/config";
 import Stripe from "stripe";
 
-const createCart = resolveRequestOrThrowError(
+const createOrder = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
-    const result = await CartServices.createCartIntoDB(request.body);
+    const result = await OrderServices.createOrderIntoDB(request.body);
     if (result) {
       sendGenericSuccessfulResponse(response, {
         message:
-          "Cart created successfully and product inventory successfully modified",
+          "Order created successfully and product inventory successfully modified",
         data: result,
       });
     } else {
       throw new DatabaseOperationFailedError(
-        "Cart creation operation failed",
+        "Order creation operation failed",
         httpStatus.INSUFFICIENT_STORAGE
       );
     }
   }
 );
 
-const getAllCarts = resolveRequestOrThrowError(
+const getAllOrders = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
-    const result = await CartServices.getAllCartsFromDB();
+    const result = await OrderServices.getAllOrdersFromDB();
     if (result) {
       sendGenericSuccessfulResponse(response, {
-        message: "All Carts are successfully retrived",
+        message: "All Orders are successfully retrived",
         data: result,
       });
     } else {
       throw new NoDataFoundError(
-        "Requested carts are not available in db",
+        "Requested orders are not available in db",
         httpStatus.NOT_FOUND
       );
     }
   }
 );
 
-const getAllCartsOfAnUser = resolveRequestOrThrowError(
+const getAllOrdersOfAnUser = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
-    const result = await CartServices.getAllCartsOfAnUserFromDB(
+    const result = await OrderServices.getAllOrdersOfAnUserFromDB(
       request.params.phone as string
     );
     if (result) {
       sendGenericSuccessfulResponse(response, {
-        message: "All Carts of User are successfully retrived",
+        message: "All Orders of User are successfully retrived",
         data: result,
       });
     } else {
       throw new NoDataFoundError(
-        "Requested carts are not available in db",
+        "Requested orders are not available in db",
         httpStatus.NOT_FOUND
       );
     }
@@ -84,8 +84,8 @@ const getClientSecretForStripePayment = resolveRequestOrThrowError(
 );
 
 export const CartController = {
-  createCart,
-  getAllCarts,
-  getAllCartsOfAnUser,
+  createOrder,
+  getAllOrders,
+  getAllOrdersOfAnUser,
   getClientSecretForStripePayment,
 };

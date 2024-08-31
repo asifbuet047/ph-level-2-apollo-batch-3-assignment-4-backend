@@ -1,8 +1,7 @@
 import { deleteModel } from "mongoose";
 import { TProduct } from "./product.interface";
 import ProductModel from "./product.model";
-import { Multer } from "multer";
-import { any } from "zod";
+
 
 const createProductIntoDB = async (product: TProduct) => {
   const result = (await ProductModel.create(product)).toJSON();
@@ -51,7 +50,6 @@ const deleteProductFromDB = async (productId: string) => {
 
 const getCategoriesFromDB = async () => {
   const result = await ProductModel.distinct("category");
-  console.log(result);
   return result;
 };
 

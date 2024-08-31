@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose";
 
-export interface TCart {
+export interface TOrder {
   client_secret: string | null;
   client_name: string;
   client_phone_number: string;

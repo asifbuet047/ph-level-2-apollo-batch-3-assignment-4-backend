@@ -6,7 +6,7 @@ import notFoundRouteHandler from "./app/middlewares/notFoundRouteHandler";
 import { ProductRouter } from "./modules/product/product.routes";
 import { DiscountRouter } from "./modules/discount/discount.routes";
 
-import { CartRouter } from "./modules/cart/cart.routes";
+import { CartRouter } from "./modules/order/order.routes";
 
 const app = express();
 app.use(cors());

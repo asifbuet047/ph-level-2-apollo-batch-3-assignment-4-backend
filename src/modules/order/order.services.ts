@@ -1,9 +1,9 @@
 import ProductModel from "../product/product.model";
-import { TCart } from "./cart.interface";
-import { CartModel } from "./cart.model";
+import { TOrder } from "./order.interface";
+import { OrderModel } from "./order.model";
 
-const createCartIntoDB = async (cart: TCart) => {
-  const result = (await CartModel.create(cart)).toJSON();
+const createOrderIntoDB = async (cart: TOrder) => {
+  const result = (await OrderModel.create(cart)).toJSON();
   if (result) {
     const product = await ProductModel.findById(cart.product_id).lean();
     if (product) {
@@ -18,8 +18,8 @@ const createCartIntoDB = async (cart: TCart) => {
   }
 };
 
-const getAllCartsFromDB = async () => {
-  const result = await CartModel.find({ _v: false });
+const getAllOrdersFromDB = async () => {
+  const result = await OrderModel.find({ _v: false });
   const refinedResult = result.map((cart) => {
     const simple = cart.toJSON();
     return simple;
@@ -27,16 +27,16 @@ const getAllCartsFromDB = async () => {
   return refinedResult;
 };
 
-const getAllCartsOfAnUserFromDB = async (phone: string) => {
-  const result = await CartModel.find(
+const getAllOrdersOfAnUserFromDB = async (phone: string) => {
+  const result = await OrderModel.find(
     { client_phone_number: phone },
     { _v: false }
   ).lean();
   return result;
 };
 
-export const CartServices = {
-  createCartIntoDB,
-  getAllCartsFromDB,
-  getAllCartsOfAnUserFromDB,
+export const OrderServices = {
+  createOrderIntoDB,
+  getAllOrdersFromDB,
+  getAllOrdersOfAnUserFromDB,
 };

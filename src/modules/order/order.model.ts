@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
-import { TCart } from "./cart.interface";
+import { TOrder } from "./order.interface";
 
-const CartSchema = new Schema<TCart>({
+const OrderSchema = new Schema<TOrder>({
   client_secret: {
     type: Schema.Types.String,
     required: true,
@@ -40,4 +40,4 @@ const CartSchema = new Schema<TCart>({
   },
 });
 
-export const CartModel = model("cart", CartSchema);
+export const OrderModel = model("order", OrderSchema);
