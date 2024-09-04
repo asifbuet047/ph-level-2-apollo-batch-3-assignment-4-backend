@@ -1,16 +1,16 @@
 import express from "express";
-import { CartController } from "./order.controller";
+import { OrderController } from "./order.controller";
 
 const router = express.Router();
 
-router.post("/secret", CartController.getClientSecretForStripePayment);
+router.post("/secret", OrderController.getClientSecretForStripePayment);
 
-router.get("/", CartController.getAllOrders);
+router.get("/", OrderController.getAllOrders);
 
-router.get("/:phone", CartController.getAllOrdersOfAnUser);
+router.get("/:phone", OrderController.getAllOrdersOfAnUser);
 
-router.post("/", CartController.createOrder);
+router.post("/", OrderController.createOrder);
 
-export const CartRouter = {
+export const OrderRouter = {
   router,
 };

@@ -4,7 +4,6 @@ import { TOrder } from "./order.interface";
 const OrderSchema = new Schema<TOrder>({
   client_secret: {
     type: Schema.Types.String,
-    required: true,
   },
   client_name: {
     type: Schema.Types.String,
@@ -22,20 +21,20 @@ const OrderSchema = new Schema<TOrder>({
     type: Schema.Types.String,
     required: true,
   },
-  product_id: {
-    type: Schema.Types.ObjectId,
+  products_id: {
+    type: [Schema.Types.ObjectId],
     required: true,
   },
-  product_name: {
-    type: Schema.Types.String,
+  products_name: {
+    type: [Schema.Types.String],
     required: true,
   },
-  product_price: {
-    type: Schema.Types.Number,
+  products_price: {
+    type: [Schema.Types.Number],
     required: true,
   },
-  product_quantity: {
-    type: Schema.Types.Number,
+  products_quantity: {
+    type: [Schema.Types.Number],
     required: true,
   },
 });

@@ -6,7 +6,7 @@ import notFoundRouteHandler from "./app/middlewares/notFoundRouteHandler";
 import { ProductRouter } from "./modules/product/product.routes";
 import { DiscountRouter } from "./modules/discount/discount.routes";
 
-import { CartRouter } from "./modules/order/order.routes";
+import { OrderRouter } from "./modules/order/order.routes";
 
 const app = express();
 app.use(cors());
@@ -22,7 +22,7 @@ app.get("/", (request: Request, response: Response) => {
 
 app.use("/product", ProductRouter.router);
 app.use("/discount", DiscountRouter.router);
-app.use("/cart", CartRouter.router);
+app.use("/order", OrderRouter.router);
 
 app.use(globalErrorHandler);
 app.use(notFoundRouteHandler);

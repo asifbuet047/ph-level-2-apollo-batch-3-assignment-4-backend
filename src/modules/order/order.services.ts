@@ -5,16 +5,18 @@ import { OrderModel } from "./order.model";
 const createOrderIntoDB = async (cart: TOrder) => {
   const result = (await OrderModel.create(cart)).toJSON();
   if (result) {
-    const product = await ProductModel.findById(cart.product_id).lean();
-    if (product) {
-      const inventory = product.quantity - cart.product_quantity;
-      const updateProduct = await ProductModel.findByIdAndUpdate(
-        cart.product_id,
-        { quantity: inventory },
-        { new: true }
-      );
-      return updateProduct;
-    }
+    result.products_id.forEach(async (id, index) => {
+      const product = await ProductModel.findById(id).lean();
+      if (product) {
+        const inventory = product.quantity - result.products_quantity[index];
+        const updateProduct = await ProductModel.findByIdAndUpdate(
+          id,
+          { quantity: inventory },
+          { new: true }
+        );
+      }
+    });
+    return result;
   }
 };
 

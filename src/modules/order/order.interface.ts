@@ -4,10 +4,10 @@ export interface TOrder {
   client_secret: string | null;
   client_name: string;
   client_phone_number: string;
-  client_country: String;
+  client_country: string;
   payment_status: "paid" | "cod";
-  product_id: ObjectId;
-  product_name: string;
-  product_quantity: number;
-  product_price: number;
+  products_id: ObjectId[];
+  products_name: string[];
+  products_quantity: number[];
+  products_price: number[];
 }
