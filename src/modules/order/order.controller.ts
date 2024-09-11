@@ -10,7 +10,6 @@ import Stripe from "stripe";
 
 const createOrder = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
-    console.log(request.body);
     const result = await OrderServices.createOrderIntoDB(request.body);
     if (result) {
       sendGenericSuccessfulResponse(response, {
