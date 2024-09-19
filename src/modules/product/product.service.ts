@@ -2,7 +2,6 @@ import { deleteModel } from "mongoose";
 import { TProduct } from "./product.interface";
 import ProductModel from "./product.model";
 
-
 const createProductIntoDB = async (product: TProduct) => {
   const result = (await ProductModel.create(product)).toJSON();
   return result;
@@ -45,6 +44,7 @@ const deleteProductFromDB = async (productId: string) => {
   const result = await ProductModel.findByIdAndDelete(productId, {
     new: true,
   }).lean();
+  console.log(result);
   return result;
 };
 

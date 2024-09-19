@@ -11,7 +11,6 @@ router.post(
   "/",
   saveImageFileIntoLocalServersTempFolder.single("file"),
   (request: Request, response: Response, next: NextFunction) => {
-    console.log(request.body);
     const temp = request.body;
     for (const key in temp) {
       if (key === "quantity" || key === "price" || key === "rating") {
