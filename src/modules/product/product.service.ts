@@ -13,7 +13,7 @@ const getProductFromDB = async (productId: string) => {
 };
 
 const getAllProductsFromDB = async () => {
-  const result = await ProductModel.find();
+  const result = await ProductModel.find().sort({ price: -1 });
   const refinedResult = result.map((product) => {
     const simple = product.toJSON();
     return simple;
@@ -22,12 +22,12 @@ const getAllProductsFromDB = async () => {
 };
 
 const getLatestProductsFromDB = async () => {
-  const result = await ProductModel.find().sort({ createdAt: -1 }).limit(5);
+  const result = await ProductModel.find().sort({ _id: -1 }).limit(5);
   const refinedResult = result.map((product) => {
     const simple = product.toJSON();
     return simple;
   });
-  return refinedResult;
+  return result;
 };
 
 const updateProductIntoDB = async (

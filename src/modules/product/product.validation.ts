@@ -19,8 +19,8 @@ const productCreationValidationSchema = z.object({
     .string({
       invalid_type_error: "Category must be string",
     })
-    .min(5, {
-      message: "Category must be greater than 5 letter",
+    .min(3, {
+      message: "Category must be greater than 3 letter",
     }),
   brand: z.string({
     invalid_type_error: "brand must be string",
@@ -36,8 +36,8 @@ const productCreationValidationSchema = z.object({
     .number({
       invalid_type_error: "Rating must be number",
     })
-    .gte(0, {
-      message: "Rating must be greater than or equal 0",
+    .gte(1, {
+      message: "Rating must be greater than or equal 1",
     })
     .optional(),
   price: z
@@ -75,8 +75,8 @@ const productUpdateValidationSchema = z.object({
     .string({
       invalid_type_error: "Category must be string",
     })
-    .min(5, {
-      message: "Category must be greater than 5 letter",
+    .min(3, {
+      message: "Category must be greater than 3 letter",
     })
     .optional(),
   brand: z
@@ -96,8 +96,8 @@ const productUpdateValidationSchema = z.object({
     .number({
       invalid_type_error: "Rating must be number",
     })
-    .gte(0, {
-      message: "Rating must be greater than or equal 0",
+    .gte(1, {
+      message: "Rating must be greater than or equal 1",
     })
     .optional(),
   price: z
