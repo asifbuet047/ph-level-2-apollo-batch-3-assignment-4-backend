@@ -8,6 +8,7 @@ import httpStatus from "http-status";
 import NoDataFoundError from "../../app/errorHandlers/NoDataFoundError";
 import { sendImageFileToCloudinaryHostingServer } from "../../app/utils/sendImageFileToCloudinaryHostingServer";
 import InvalidImageFileUploadedError from "../../app/errorHandlers/InvalidImageFileUploadedError";
+import { string } from "zod";
 
 const createProduct = resolveRequestOrThrowError(
   async (request: Request, response: Response, next: NextFunction) => {
